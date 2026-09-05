@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ログイン | 筆跡照合支援ツール</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="site-nav" aria-label="サイト内ページ">
+  <ul>
+    <li><a href="index.html">トップ</a></li>
+    <li><a href="methodology.html">鑑定の手段・方法</a></li>
+    <li><a href="reliability.html">鑑定の信頼度について</a></li>
+    <li><a href="privacy.html">プライバシーポリシー</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+    <li><a href="login.html" aria-current="page" class="site-nav-login">ログイン（スタッフ）</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <div class="header-inner">
+    <p class="eyebrow-none">スタッフ専用</p>
+    <h1>ログイン</h1>
+    <p class="lede">案件の作成・画像アップロード・照合・鑑定書の作成は、ログインしたスタッフのみが行えます。</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- LOGIN -->
+  <section class="panel panel--sage" id="panel-auth">
+    <h2>ログイン方法</h2>
+    <ol class="login-steps">
+      <li>管理者から発行された<strong>メールアドレスとパスワード</strong>を用意してください。</li>
+      <li>下の欄にメールアドレスとパスワードを入力し、「ログイン」ボタンを押してください。</li>
+      <li>ログインに成功すると、このページの下に案件の作成・アップロード・照合・鑑定書作成の画面が表示されます。</li>
+    </ol>
+    <p class="hint">
+      このページから新規登録はできません。アカウントをお持ちでない方、パスワードを忘れた方は、
+      管理者（Firebaseコンソールの管理者）にご連絡ください。
+    </p>
+
+    <div id="auth-signed-out">
+      <div class="case-row">
+        <input type="email" id="auth-email" placeholder="メールアドレス" autocomplete="username">
+        <input type="password" id="auth-password" placeholder="パスワード" autocomplete="current-password">
+        <button id="btn-signin" class="btn btn-primary" style="flex:0 0 auto;">ログイン</button>
+      </div>
+      <p class="hint" id="auth-status"></p>
+    </div>
+
+    <div id="auth-signed-in" hidden>
+      <p class="hint">ログイン中: <strong id="auth-user-email"></strong>
+        <button id="btn-signout" class="btn btn-quiet">ログアウト</button>
+      </p>
+    </div>
+  </section>
+
+  <!-- APP BODY (ログイン後のみ表示) -->
+  <div id="app-body" hidden>
+
+    <section class="panel panel--sand" id="panel-case">
+      <h2><span class="step-num">1</span>案件を選ぶ</h2>
+      <div class="case-row">
+        <select id="case-select" aria-label="保存済みの案件">
+          <option value="">— 新しい案件を作成 —</option>
+        </select>
+        <input type="text" id="case-name" placeholder="案件名（例：契約書サイン照合）" maxlength="60">
+        <button id="btn-new-case" class="btn btn-quiet">保存</button>
+        <button id="btn-delete-case" class="btn btn-quiet btn-danger" hidden>この案件を削除</button>
+      </div>
+      <p class="hint">案件はFirebase（共有データベース）に保存され、ログインしたスタッフ全員が閲覧できます。</p>
+    </section>
+
+    <section class="panel panel--sky" id="panel-upload">
+      <h2><span class="step-num">2</span>画像・PDFを読み込む</h2>
+
+      <div class="upload-grid">
+        <div class="upload-col">
+          <h3>試料筆跡<span class="sub">（鑑定したい筆跡）</span></h3>
+          <label class="dropzone" for="input-sample">
+            <span class="dz-main">クリックまたはドラッグしてA4画像・PDFを追加</span>
+            <span class="dz-sub">最大5枚・JPEG/PNG/PDF</span>
+          </label>
+          <input type="file" id="input-sample" accept="image/*,application/pdf" multiple hidden>
+          <ul class="thumb-list" id="list-sample"></ul>
+        </div>
+
+        <div class="upload-col">
+          <h3>対照筆跡<span class="sub">（本人と分かっている筆跡）</span></h3>
+          <label class="dropzone" for="input-reference">
+            <span class="dz-main">クリックまたはドラッグしてA4画像・PDFを追加</span>
+            <span class="dz-sub">最大5枚・JPEG/PNG/PDF</span>
+          </label>
+          <input type="file" id="input-reference" accept="image/*,application/pdf" multiple hidden>
+          <ul class="thumb-list" id="list-reference"></ul>
+        </div>
+      </div>
+      <p class="hint">PDFをアップロードすると、自動的に画像に変換してから読み込みます。複数ページのPDFは、ページごとに1枚として数えます（合計5枚まで）。</p>
+      <p class="hint" id="upload-status"></p>
+    </section>
+
+    <section class="panel panel--blush" id="panel-analyze">
+      <h2><span class="step-num">3</span>照合する</h2>
+      <button id="btn-analyze" class="btn btn-primary" disabled>特徴を抽出して照合する</button>
+      <p class="hint" id="analyze-status"></p>
+
+      <div id="result-area" hidden>
+        <div class="score-block">
+          <div class="score-ring" id="score-ring">
+            <span id="score-number">--</span>
+            <span class="score-percent">%</span>
+          </div>
+          <div class="score-text">
+            <p class="score-verdict" id="score-verdict">—</p>
+            <p class="score-detail" id="score-detail"></p>
+          </div>
+        </div>
+
+        <table class="feature-table" id="feature-table">
+          <thead>
+            <tr><th>特徴項目</th><th>試料 平均</th><th>対照 平均</th><th>一致度</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <button id="btn-certificate" class="btn btn-primary">鑑定書を作成する</button>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-certificate" hidden>
+      <h2><span class="step-num">4</span>鑑定書</h2>
+      <div class="cert-controls">
+        <label>鑑定者名<input type="text" id="cert-examiner" placeholder="任意"></label>
+        <label>備考<input type="text" id="cert-note" placeholder="任意"></label>
+        <button id="btn-print" class="btn btn-quiet">印刷 / PDF保存</button>
+      </div>
+
+      <article class="certificate" id="certificate">
+        <header class="cert-header">
+          <h3>筆 跡 照 合 報 告 書</h3>
+          <p class="cert-id" id="cert-id"></p>
+        </header>
+
+        <table class="cert-meta">
+          <tbody>
+            <tr><th>作成日</th><td id="cert-date"></td></tr>
+            <tr><th>案件名</th><td id="cert-case-name"></td></tr>
+            <tr><th>試料枚数</th><td id="cert-sample-count"></td></tr>
+            <tr><th>対照枚数</th><td id="cert-reference-count"></td></tr>
+            <tr><th>鑑定者</th><td id="cert-examiner-out"></td></tr>
+          </tbody>
+        </table>
+
+        <section class="cert-result">
+          <h4>総合一致度</h4>
+          <p class="cert-score" id="cert-score">--%</p>
+          <p class="cert-verdict" id="cert-verdict"></p>
+        </section>
+
+        <section class="cert-features">
+          <h4>特徴別の内訳</h4>
+          <table class="cert-feature-table" id="cert-feature-table">
+            <thead><tr><th>項目</th><th>一致度</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </section>
+
+        <section class="cert-note">
+          <h4>備考</h4>
+          <p id="cert-note-out">—</p>
+        </section>
+
+        <section class="cert-disclaimer">
+          <h4>本報告書について</h4>
+          <p>
+            本報告書は、画像から抽出した線の太さ・傾き・密度・方向分布などの統計的特徴をもとに算出した参考値であり、
+            筆跡鑑定士や司法機関による正式な鑑定書ではありません。裁判や契約上の証拠として用いる場合は、
+            必ず有資格の専門家による鑑定を別途受けてください。
+          </p>
+        </section>
+
+        <footer class="cert-sign">
+          <div class="sign-line"><span>鑑定者署名</span></div>
+          <div class="sign-stamp" aria-hidden="true"></div>
+        </footer>
+      </article>
+
+      <a id="btn-inquire-cert" class="btn btn-quiet cert-inquire-link" href="contact.html">この鑑定書について問い合わせる</a>
+    </section>
+
+  </div><!-- /app-body -->
+
+</main>
+
+<footer class="site-footer">
+  <p>筆跡照合支援ツール — 画像はFirebase Storageに、案件情報はFirestoreに保存されます（ログインユーザーのみアクセス可）。</p>
+  <p><a href="index.html">トップ</a> ／ <a href="methodology.html">鑑定の手段・方法</a> ／ <a href="reliability.html">鑑定の信頼度について</a> ／ <a href="privacy.html">プライバシーポリシー</a> ／ <a href="contact.html">お問い合わせ</a></p>
+</footer>
+
+<script src="analysis.js"></script>
+<script src="certificate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js"></script>
+<script type="module" src="firebase-config.js"></script>
+<script type="module" src="firebase-backend.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

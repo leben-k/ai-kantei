@@ -40,6 +40,12 @@ const HandCertificate = (() => {
 
     document.getElementById('cert-note-out').textContent = note && note.trim() ? note.trim() : '—';
 
+    const inquireLink = document.getElementById('btn-inquire-cert');
+    if (inquireLink) {
+      const ref = `${caseObj.name || '無題の案件'}（${certId}）`;
+      inquireLink.href = 'contact.html?ref=' + encodeURIComponent(ref);
+    }
+
     document.getElementById('panel-certificate').hidden = false;
     document.getElementById('panel-certificate').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }

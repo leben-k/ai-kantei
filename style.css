@@ -12,6 +12,11 @@
   --seal-soft: #C97B6C;
   --good: #3D6B4A;
   --radius-doc: 2px;
+
+  --tint-sand:  #F1E9D6;
+  --tint-sky:   #E7EEF2;
+  --tint-sage:  #E9EFE4;
+  --tint-blush: #F3E6E1;
 }
 
 *{ box-sizing: border-box; }
@@ -50,6 +55,12 @@ h1,h2,h3,h4{
 }
 .site-nav a:hover{ border-bottom-color: var(--navy); }
 .site-nav a[aria-current="page"]{ color: var(--seal); border-bottom-color: var(--seal); }
+.site-nav a.site-nav-login{
+  color: #fff; background: var(--navy); padding: .25rem .7rem; border-radius: var(--radius-doc);
+  border-bottom-color: transparent;
+}
+.site-nav a.site-nav-login:hover{ background: var(--navy-soft); border-bottom-color: transparent; }
+.site-nav a.site-nav-login[aria-current="page"]{ background: var(--seal); color:#fff; }
 
 /* ---------- header ---------- */
 .site-header{
@@ -68,23 +79,72 @@ h1,h2,h3,h4{
 
 /* ---------- article content (sub-pages) ---------- */
 .article{ max-width: 680px; margin: 0 auto; }
-.article section{ margin-bottom: 2.2rem; }
+.article section{
+  margin-bottom: 1.8rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--radius-doc);
+  background: var(--tint-sand);
+}
+.article section:nth-of-type(4n+2){ background: var(--tint-sky); }
+.article section:nth-of-type(4n+3){ background: var(--tint-sage); }
+.article section:nth-of-type(4n+4){ background: var(--tint-blush); }
 .article h2{ font-size: 1.15rem; margin-bottom: .6rem; }
 .article h3{ font-size: 1rem; margin: 1.1rem 0 .4rem; font-family:'Noto Sans JP',sans-serif; font-weight:700; }
+.article h3:first-child{ margin-top: 0; }
 .article p{ margin: 0 0 .9rem; color: var(--ink); }
 .article ul, .article ol{ margin: 0 0 .9rem; padding-left: 1.3rem; }
 .article li{ margin-bottom: .35rem; }
-.article table{ width:100%; table-layout: fixed; border-collapse: collapse; margin: 0 0 1.2rem; font-size:.88rem; }
+.article table{ width:100%; table-layout: fixed; border-collapse: collapse; margin: 0 0 1.2rem; font-size:.88rem; background: transparent; }
 .article th, .article td{
   border-bottom: 1px solid var(--line); padding:.5rem .5rem; text-align:left; vertical-align:top;
   overflow-wrap: break-word; word-break: break-word;
 }
 .article th{ color: var(--ink-soft); font-weight:500; width: 32%; }
-.article .note-box{
-  background: rgba(166,58,46,.05); border-left:3px solid var(--seal);
-  padding: .9rem 1rem; font-size: .88rem; color: var(--ink-soft);
+
+/* 取得する情報などの一覧を、行の高さがバラつく表の代わりに使う定義リスト */
+.info-list{ margin: 0 0 1rem; }
+.info-item{ padding: .6rem 0; border-bottom: 1px solid var(--line); }
+.info-item:last-child{ border-bottom: none; }
+.info-item dt{ font-weight: 700; margin-bottom: .2rem; }
+.info-item dd{ margin: 0; color: var(--ink-soft); font-size: .88rem; }
+
+.article section.note-box{
+  background: rgba(166,58,46,.07); border-left:3px solid var(--seal);
+  padding: 1.1rem 1.2rem; font-size: .88rem; color: var(--ink-soft);
 }
-.article .updated{ font-size: .8rem; color: var(--ink-soft); margin-top: -1rem; margin-bottom: 2rem; }
+.article .updated{ font-size: .8rem; color: var(--ink-soft); margin-top: -1rem; margin-bottom: 1.4rem; background:none; padding:0; }
+
+/* ---------- 専門家への案内（トップページ） ---------- */
+.expert-callout{
+  background: var(--navy) !important;
+  color: #fff;
+  text-align: center;
+  padding: 1.8rem 1.6rem;
+}
+.expert-callout h3{ color:#fff; margin-top:0; }
+.expert-callout p{ color: rgba(255,255,255,.85); }
+.expert-callout-link{
+  display:inline-block; width:auto; margin-top:.6rem;
+  background:#fff; color: var(--navy); border-color:#fff;
+}
+.expert-callout-link:hover{ background: var(--tint-sand); }
+
+/* ---------- ホームのイラスト（ログインへのリンク） ---------- */
+.hero-illustration-link{
+  display:block; max-width: 780px; margin: 1.6rem auto 0; padding: 0 1.4rem;
+  text-decoration:none; text-align:center;
+}
+.hero-illustration{ width:100%; max-width: 480px; height:auto; }
+.hero-illustration-caption{
+  display:block; margin-top:.5rem; font-size:.85rem; color: var(--navy);
+  border-bottom: 1px solid transparent;
+}
+.hero-illustration-link:hover .hero-illustration-caption{ border-bottom-color: var(--navy); }
+.hero-illustration-link:hover .hero-illustration{ filter: brightness(1.03); }
+
+/* ---------- ログイン手順（login.html） ---------- */
+.login-steps{ padding-left: 1.4rem; margin: 0 0 1rem; }
+.login-steps li{ margin-bottom: .5rem; }
 .header-inner{
   max-width: 780px;
   margin: 0 auto;
@@ -106,6 +166,10 @@ main{ max-width: 780px; margin: 0 auto; padding: 2rem 1.4rem 4rem; }
   padding: 1.8rem 1.6rem;
   margin-bottom: 1.6rem;
 }
+.panel--sage{ background: var(--tint-sage); }
+.panel--sky{ background: var(--tint-sky); }
+.panel--sand{ background: var(--tint-sand); }
+.panel--blush{ background: var(--tint-blush); }
 .panel h2{ font-size: 1.2rem; display:flex; align-items:center; gap:.7rem; margin-bottom:1.1rem;}
 .step-num{
   display:inline-flex; align-items:center; justify-content:center;
@@ -219,7 +283,7 @@ select:focus, input:focus, textarea:focus{ outline: 2px solid var(--navy-soft); 
 .cert-controls input{ flex:none; }
 .cert-controls .btn{ margin-left:auto; }
 
-.cert-inquire-link{ display:block; margin: 1.2rem auto 0; }
+.cert-inquire-link{ display:block; width: fit-content; margin: 1.2rem auto 0; text-decoration:none; text-align:center; }
 
 /* ---------- certificate document ---------- */
 .certificate{
@@ -269,8 +333,8 @@ select:focus, input:focus, textarea:focus{ outline: 2px solid var(--navy-soft); 
 
 /* ---------- print ---------- */
 @media print{
-  .site-header, .site-footer, #panel-auth, #panel-case, #panel-upload, #panel-analyze,
-  #panel-inquiry, .cert-controls, .cert-inquire-link{ display:none !important; }
+  .site-header, .site-nav, .site-footer, #panel-auth, #panel-case, #panel-upload, #panel-analyze,
+  .cert-controls, .cert-inquire-link{ display:none !important; }
   body{ background:#fff; }
   .certificate{ box-shadow:none; border:none; margin:0; max-width:none; }
 }

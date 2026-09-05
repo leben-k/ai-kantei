@@ -16,6 +16,10 @@ GitHub Pages（無料）でホスティングし、Firebase（無料のSparkプ�
 
 すべて無料枠の範囲で運用できますが、アクセス数・画像サイズが増えると有料プランへの移行が必要になる場合があります。
 
+## 対応ファイル形式
+
+JPEG・PNGに加え、**PDFのアップロードにも対応**しています。PDFをアップロードすると、ブラウザ内で自動的に画像へ変換してから解析します（変換には pdf.js という外部ライブラリをCDN経由で読み込んで使用しています）。複数ページのPDFは、ページごとに1枚として数えます（試料・対照それぞれ合計5枚まで）。
+
 ## 重要な限界（必ずお読みください）
 
 - このツールは画像から機械的に取り出せる二次的な特徴（線の太さ・傾き・密度・方向分布など）を比較する簡易的な参考ツールです。実際の筆跡鑑定士が行う鑑定（筆順、筆圧、運筆速度、個別の字形の分析など）とは精度も方法もまったく異なり、**法的な証拠能力を持つ鑑定書ではありません**。裁判・契約・警察提出など正式な証拠が必要な場面では、必ず有資格の筆跡鑑定士に依頼してください。
@@ -23,18 +27,23 @@ GitHub Pages（無料）でホスティングし、Firebase（無料のSparkプ�
 
 ## ファイル構成
 
+実際にリポジトリのルートにアップロードするのは、フォルダ分けのない以下のファイル一式です（`css/`・`js/`のようなサブフォルダは使いません）。
+
 ```
 handwriting-appraisal/
-├── index.html                 # 画面本体（ログイン・案件・アップロード・照合・鑑定書・問い合わせ）
-├── css/style.css               # デザイン
-├── js/analysis.js              # 画像特徴抽出・類似度計算（ブラウザ内で完結）
-├── js/certificate.js           # 鑑定書（報告書）の描画
-├── js/firebase-config.js       # あなたのFirebaseプロジェクトの設定値（要編集）
-├── js/firebase-backend.js      # Firestore/Storage/Authのラッパー（共有データベース層）
-├── js/app.js                   # 画面の状態管理・イベント配線（Formspreeの送信先もここで設定）
-├── methodology.html            # 「鑑定の手段・方法」ページ
-├── reliability.html            # 「鑑定の信頼度について」ページ
-└── privacy.html                # 「プライバシーポリシー」ページ（要編集・下記参照）
+├── index.html              # トップページ（誰でも閲覧可・概要と信頼度の説明・専門家紹介リンク）
+├── login.html              # ログインページ（スタッフ専用・案件作成〜鑑定書作成の機能一式）
+├── contact.html            # お問い合わせページ（Formspreeフォーム）
+├── methodology.html        # 「鑑定の手段・方法」ページ
+├── reliability.html        # 「鑑定の信頼度について」ページ
+├── privacy.html            # 「プライバシーポリシー」ページ（要編集・下記参照）
+├── style.css               # デザイン（全ページ共通）
+├── analysis.js             # 画像特徴抽出・類似度計算（ブラウザ内で完結）
+├── certificate.js          # 鑑定書（報告書）の描画
+├── contact.js              # お問い合わせページ専用スクリプト（Formspreeの送信先はここ）
+├── firebase-config.js      # あなたのFirebaseプロジェクトの設定値（要編集）
+├── firebase-backend.js     # Firestore/Storage/Authのラッパー（共有データベース層）
+└── app.js                  # login.html専用：画面の状態管理・イベント配線
 ```
 
 `methodology.html`・`reliability.html`は内容の編集は不要ですが、`privacy.html`は運営者名・連絡先・最終更新日などを実際の内容に書き換えてから公開してください（本文中に記入箇所を示すコメントがあります）。このプライバシーポリシーはひな形であり、法的助言ではありません。実際の運用前に必要に応じて専門家の確認を受けてください。
@@ -51,20 +60,14 @@ handwriting-appraisal/
 
 ### 2. ウェブアプリを登録し、設定値を取得する
 
-1. プロジェクトのトップ画面で `</>`（ウェブ）アイコンをクリックしてアプリを追加。
-2. アプリのニックネームを入力（例: `handwriting-web`）。Firebase Hostingは今回使わないのでチェック不要。
-3. 表示される `firebaseConfig` の値（apiKey, authDomain, projectId など）をコピーし、`js/firebase-config.js` の該当箇所に貼り付けます。
+このプロジェクト（`tasuku-kanri-2380a`）はすでに作成済みです。`js/firebase-config.js` には
+`projectId` / `authDomain` / `storageBucket` を既に設定してあります。残りの `apiKey` /
+`messagingSenderId` / `appId` は、次の手順で取得して書き換えてください。
 
-   ```js
-   export const firebaseConfig = {
-     apiKey: "実際の値",
-     authDomain: "実際の値",
-     projectId: "実際の値",
-     storageBucket: "実際の値",
-     messagingSenderId: "実際の値",
-     appId: "実際の値"
-   };
-   ```
+1. https://console.firebase.google.com/project/tasuku-kanri-2380a/settings/general を開く。
+2. 「マイアプリ」でウェブアプリ（`</>`アイコン）を登録（まだなら「アプリを追加」）。Firebase Hostingのチェックは不要。
+3. 表示される `firebaseConfig` の `apiKey`, `messagingSenderId`, `appId` を `js/firebase-config.js` の該当箇所に貼り付けます。
+
    この値は秘密鍵ではないため、GitHubに公開してかまいません（アクセス制御はステップ4・5のルールで行います）。
 
 ### 3. Authentication（ログイン）を有効化し、スタッフのアカウントを作る
@@ -111,7 +114,7 @@ handwriting-appraisal/
    ```json
    [
      {
-       "origin": ["https://<あなたのユーザー名>.github.io"],
+       "origin": ["https://leben-k.github.io"],
        "method": ["GET"],
        "maxAgeSeconds": 3600
      }
@@ -119,7 +122,7 @@ handwriting-appraisal/
    ```
 
    ```bash
-   gsutil cors set cors.json gs://<あなたのプロジェクトID>.appspot.com
+   gsutil cors set cors.json gs://tasuku-kanri-2380a.appspot.com
    ```
    ローカルで動作確認する場合は `origin` に `http://localhost:xxxx` も追加してください。
 
@@ -127,7 +130,7 @@ handwriting-appraisal/
 
 1. https://formspree.io/ でアカウントを作成（無料）。
 2. 「New Form」でフォームを作成すると、`https://formspree.io/f/xxxxxxx` のようなエンドポイントURLが発行されます。
-3. `js/app.js` の先頭にある以下の行を、発行されたURLに書き換えます。
+3. `contact.js` の先頭にある以下の行を、発行されたURLに書き換えます。
 
    ```js
    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_ME';
@@ -137,32 +140,44 @@ handwriting-appraisal/
 
 ### 7. GitHub Pagesで公開する
 
-1. GitHubで新しい **Publicリポジトリ**を作成します（例: `handwriting-appraisal`）。
-2. このフォルダの中身（`index.html`, `css/`, `js/`, `README.md`）をリポジトリのルートにアップロードします。
+このプロジェクト用のリポジトリ（`https://github.com/leben-k/ai-kantei.git`）に、このフォルダの中身
+（`index.html`, `login.html`, `contact.html`, `methodology.html`, `reliability.html`, `privacy.html`,
+`style.css`, `analysis.js`, `certificate.js`, `contact.js`, `firebase-config.js`, `firebase-backend.js`,
+`app.js`, `README.md`）をルート直下にそのままアップロードします（サブフォルダは作りません）。
 
-   ```bash
-   git init
-   git add .
-   git commit -m "init: handwriting comparison desk (firebase + formspree)"
-   git branch -M main
-   git remote add origin https://github.com/<あなたのユーザー名>/handwriting-appraisal.git
-   git push -u origin main
-   ```
+```bash
+git init
+git add .
+git commit -m "init: handwriting comparison desk (firebase + formspree)"
+git branch -M main
+git remote add origin https://github.com/leben-k/ai-kantei.git
+git push -u origin main
+```
 
-3. リポジトリの **Settings → Pages** →「Build and deployment」の「Source」で **Deploy from a branch** を選び、Branchを `main` / フォルダを `/(root)` に設定して保存。
-4. 数十秒〜数分後、`https://<あなたのユーザー名>.github.io/handwriting-appraisal/` でアクセスできます。
-5. ステップ5のCORS設定の `origin` を、この実際のURLに合わせて再確認してください。
+すでにリポジトリに何かファイルがある場合（README等）は、先に `git clone` してから中身を上書きするか、
+GitHubの「Add file → Upload files」から直接アップロードしても構いません。
+
+1. リポジトリの **Settings → Pages** →「Build and deployment」の「Source」で **Deploy from a branch** を選び、Branchを `main` / フォルダを `/(root)` に設定して保存。
+2. 数十秒〜数分後、`https://leben-k.github.io/ai-kantei/` でアクセスできます。
+3. ステップ5のCORS設定の `origin` を、この実際のURL（`https://leben-k.github.io`）に合わせて設定してください。
 
 ---
 
+## ページ構成
+
+- **index.html** — 誰でも見られるトップページ。鑑定の概要・信頼度の要約・専門の鑑定士サイトへの案内・各ページへのリンクのみで、ログインや案件操作の機能は含みません。
+- **login.html** — スタッフ専用。ログイン方法の説明とログインフォーム、ログイン後に表示される案件作成・画像アップロード・照合・鑑定書作成の一式。
+- **contact.html** — お問い合わせフォーム（Formspree）。ログイン不要で誰でも送信できます。
+
 ## 使い方
 
-1. トップの「ログイン」でステップ3で発行したメールアドレス・パスワードを入力してログイン。
-2. 「案件を選ぶ」で案件名を入力（新規作成時は画像追加のタイミングで自動的に保存されます）。
-3. 「試料筆跡」「対照筆跡」それぞれにA4画像をアップロード（各最大5枚）。アップロードはFirebase Storageに保存され、他のログインユーザーからも同じ案件が見えるようになります。
-4. 「特徴を抽出して照合する」で一致度スコアを表示。
-5. 「鑑定書を作成する」で報告書を生成。「印刷 / PDF保存」でPDF化できます。
-6. 依頼者からの問い合わせは、ページ下部の「お問い合わせ」フォーム（Formspree経由）で受け付けます。
+1. トップページ（`index.html`）から「ログイン（スタッフ）」をクリックし、`login.html` に移動。
+2. ページ上部の説明に従い、管理者から発行されたメールアドレス・パスワードでログイン。
+3. 「案件を選ぶ」で案件名を入力（新規作成時は画像追加のタイミングで自動的に保存されます）。
+4. 「試料筆跡」「対照筆跡」それぞれにA4画像・PDFをアップロード（各最大5枚）。アップロードはFirebase Storageに保存され、他のログインユーザーからも同じ案件が見えるようになります。
+5. 「特徴を抽出して照合する」で一致度スコアを表示。
+6. 「鑑定書を作成する」で報告書を生成。「印刷 / PDF保存」でPDF化できます。
+7. 依頼者からの問い合わせは、`contact.html`（お問い合わせページ、Formspree経由）で受け付けます。鑑定書の「この鑑定書について問い合わせる」リンクから来た場合、案件名・報告書番号が自動入力されます。
 
 ## 既知の制限・今後の拡張候補
 

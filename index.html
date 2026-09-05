@@ -14,6 +14,8 @@
     <li><a href="methodology.html">鑑定の手段・方法</a></li>
     <li><a href="reliability.html">鑑定の信頼度について</a></li>
     <li><a href="privacy.html">プライバシーポリシー</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+    <li><a href="login.html" class="site-nav-login">ログイン（スタッフ）</a></li>
   </ul>
 </nav>
 
@@ -21,198 +23,95 @@
   <div class="header-inner">
     <div class="header-text">
       <h1>筆跡照合支援ツール</h1>
-      <p class="lede">試料と対照筆跡を並べ、特徴を数値化して照合します。案件データはスタッフ間で共有され、ログインしたメンバーだけが閲覧・編集できます。</p>
+      <p class="lede">試料筆跡と対照筆跡をアップロードし、画像の統計的な特徴を数値化して照合するためのツールです。</p>
     </div>
   </div>
 </header>
 
 <main>
 
-  <!-- LOGIN -->
-  <section class="panel" id="panel-auth">
-    <h2><span class="step-num">0</span>ログイン</h2>
+  <a class="hero-illustration-link" href="login.html" aria-label="ログインして鑑定を始める">
+    <svg class="hero-illustration" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+      <!-- 机 -->
+      <rect x="20" y="230" width="440" height="8" fill="var(--line)"/>
+      <!-- ノートPC本体 -->
+      <path d="M120 210 L360 210 L380 232 L100 232 Z" fill="var(--navy)"/>
+      <rect x="150" y="70" width="180" height="140" rx="8" fill="var(--navy)"/>
+      <rect x="160" y="80" width="160" height="120" rx="4" fill="#FBF8F1"/>
+      <!-- 画面の中の筆跡（波線） -->
+      <path d="M175 120 q10 -18 20 0 t20 0 t20 0 t20 0" fill="none" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M175 145 q8 -14 16 0 t16 0 t16 0 t16 0 t16 0" fill="none" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+      <!-- 虫眼鏡（照合のイメージ） -->
+      <circle cx="262" cy="132" r="26" fill="rgba(166,58,46,0.06)" stroke="var(--seal)" stroke-width="5"/>
+      <line x1="281" y1="151" x2="300" y2="170" stroke="var(--seal)" stroke-width="6" stroke-linecap="round"/>
+      <!-- 一致度バッジ -->
+      <circle cx="262" cy="132" r="10" fill="none" stroke="var(--good)" stroke-width="3"/>
+      <path d="M257 132 l4 4 l8 -9" fill="none" stroke="var(--good)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- 右側の書類（鑑定書のイメージ） -->
+      <rect x="345" y="90" width="80" height="110" rx="4" fill="#FBF8F1" stroke="var(--line)" stroke-width="2"/>
+      <line x1="360" y1="112" x2="410" y2="112" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="360" y1="126" x2="410" y2="126" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+      <line x1="360" y1="140" x2="395" y2="140" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="393" cy="172" r="15" fill="none" stroke="var(--seal)" stroke-width="3"/>
+      <text x="393" y="177" text-anchor="middle" font-family="'Shippori Mincho',serif" font-size="14" fill="var(--seal)">印</text>
+    </svg>
+    <span class="hero-illustration-caption">クリックしてログイン画面へ → 鑑定をはじめる</span>
+  </a>
 
-    <div id="auth-signed-out">
-      <div class="case-row">
-        <input type="email" id="auth-email" placeholder="メールアドレス" autocomplete="username">
-        <input type="password" id="auth-password" placeholder="パスワード" autocomplete="current-password">
-        <button id="btn-signin" class="btn btn-primary" style="flex:0 0 auto;">ログイン</button>
-      </div>
-      <p class="hint" id="auth-status"></p>
-      <p class="hint">アカウントは管理者がFirebaseコンソールから発行します。このページからの新規登録はできません。</p>
-    </div>
+  <article class="article">
 
-    <div id="auth-signed-in" hidden>
-      <p class="hint">ログイン中: <strong id="auth-user-email"></strong>
-        <button id="btn-signout" class="btn btn-quiet">ログアウト</button>
+    <section>
+      <h2>この鑑定はどのようにするものか</h2>
+      <h3>1. 画像・PDFをアップロードする</h3>
+      <p>鑑定したい筆跡（試料）と、本人のものと分かっている筆跡（対照）を、それぞれ写真またはPDFでアップロードします（各最大5枚）。</p>
+      <h3>2. 特徴を数値化して比較する</h3>
+      <p>インク密度・線の太さ・傾き・文字の配置・線の方向の傾向など、画像から機械的に取り出せる特徴を算出し、試料群と対照群の近さを一致度（%）で表示します。</p>
+      <h3>3. 鑑定書（報告書）を作成する</h3>
+      <p>算出された結果をもとに、印刷・PDF保存できる報告書のレイアウトを自動で作成します。</p>
+      <p><a href="methodology.html">→ 処理の詳しい仕組みはこちら（鑑定の手段・方法）</a></p>
+    </section>
+
+    <section class="note-box">
+      <h3 style="margin-top:0;">信頼度について（重要）</h3>
+      <p style="margin-bottom:0;">
+        本ツールが算出するのは、画像から取り出せる統計的な特徴の「近さ」を示す参考値であり、
+        「本人が書いたものである」ことを証明・否定するものではありません。実際の筆跡鑑定士が行う鑑定
+        （筆順・筆圧・運筆速度・字形の詳細分析など）とは精度も方法もまったく異なり、
+        <strong>法的な証拠能力を持つ鑑定書ではありません</strong>。裁判・契約・警察提出など、正式な証拠が
+        必要な場面では、必ず有資格の専門家による鑑定を受けてください。
       </p>
-    </div>
-  </section>
+    </section>
+    <p><a href="reliability.html">→ スコアの読み方・利用に適した場面／適さない場面はこちら（鑑定の信頼度について）</a></p>
 
-  <!-- APP BODY (ログイン後のみ表示) -->
-  <div id="app-body" hidden>
-
-    <section class="panel" id="panel-case">
-      <h2><span class="step-num">1</span>案件を選ぶ</h2>
-      <div class="case-row">
-        <select id="case-select" aria-label="保存済みの案件">
-          <option value="">— 新しい案件を作成 —</option>
-        </select>
-        <input type="text" id="case-name" placeholder="案件名（例：契約書サイン照合）" maxlength="60">
-        <button id="btn-new-case" class="btn btn-quiet">保存</button>
-        <button id="btn-delete-case" class="btn btn-quiet btn-danger" hidden>この案件を削除</button>
-      </div>
-      <p class="hint">案件はFirebase（共有データベース）に保存され、ログインしたスタッフ全員が閲覧できます。</p>
+    <section class="expert-callout">
+      <h3>専門的知見を有する鑑定士による鑑定はこちら</h3>
+      <p>
+        法的な証拠能力が必要な場合や、より詳細で専門的な鑑定をご希望の場合は、
+        資格を持つ鑑定士による「筆跡指紋鑑定」もご利用いただけます。
+      </p>
+      <a class="btn btn-primary expert-callout-link" href="https://leben-k.github.io/kantei-site/index.html">
+        筆跡指紋鑑定のサイトへ
+      </a>
     </section>
 
-    <section class="panel" id="panel-upload">
-      <h2><span class="step-num">2</span>画像・PDFを読み込む</h2>
-
-      <div class="upload-grid">
-        <div class="upload-col">
-          <h3>試料筆跡<span class="sub">（鑑定したい筆跡）</span></h3>
-          <label class="dropzone" for="input-sample">
-            <span class="dz-main">クリックまたはドラッグしてA4画像・PDFを追加</span>
-            <span class="dz-sub">最大5枚・JPEG/PNG/PDF</span>
-          </label>
-          <input type="file" id="input-sample" accept="image/*,application/pdf" multiple hidden>
-          <ul class="thumb-list" id="list-sample"></ul>
-        </div>
-
-        <div class="upload-col">
-          <h3>対照筆跡<span class="sub">（本人と分かっている筆跡）</span></h3>
-          <label class="dropzone" for="input-reference">
-            <span class="dz-main">クリックまたはドラッグしてA4画像・PDFを追加</span>
-            <span class="dz-sub">最大5枚・JPEG/PNG/PDF</span>
-          </label>
-          <input type="file" id="input-reference" accept="image/*,application/pdf" multiple hidden>
-          <ul class="thumb-list" id="list-reference"></ul>
-        </div>
-      </div>
-      <p class="hint">PDFをアップロードすると、自動的に画像に変換してから読み込みます。複数ページのPDFは、ページごとに1枚として数えます（合計5枚まで）。</p>
-      <p class="hint" id="upload-status"></p>
+    <section>
+      <h2>ご利用にあたって</h2>
+      <p>
+        鑑定作業（アップロード・照合・鑑定書作成）は、管理者が発行したアカウントを持つスタッフのみが行えます。
+        スタッフの方は「<a href="login.html">ログイン</a>」ページからお進みください。
+      </p>
+      <p>
+        鑑定のご依頼やご質問は「<a href="contact.html">お問い合わせ</a>」ページからご連絡ください。
+      </p>
     </section>
 
-    <section class="panel" id="panel-analyze">
-      <h2><span class="step-num">3</span>照合する</h2>
-      <button id="btn-analyze" class="btn btn-primary" disabled>特徴を抽出して照合する</button>
-      <p class="hint" id="analyze-status"></p>
-
-      <div id="result-area" hidden>
-        <div class="score-block">
-          <div class="score-ring" id="score-ring">
-            <span id="score-number">--</span>
-            <span class="score-percent">%</span>
-          </div>
-          <div class="score-text">
-            <p class="score-verdict" id="score-verdict">—</p>
-            <p class="score-detail" id="score-detail"></p>
-          </div>
-        </div>
-
-        <table class="feature-table" id="feature-table">
-          <thead>
-            <tr><th>特徴項目</th><th>試料 平均</th><th>対照 平均</th><th>一致度</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-
-        <button id="btn-certificate" class="btn btn-primary">鑑定書を作成する</button>
-      </div>
-    </section>
-
-    <section class="panel" id="panel-certificate" hidden>
-      <h2><span class="step-num">4</span>鑑定書</h2>
-      <div class="cert-controls">
-        <label>鑑定者名<input type="text" id="cert-examiner" placeholder="任意"></label>
-        <label>備考<input type="text" id="cert-note" placeholder="任意"></label>
-        <button id="btn-print" class="btn btn-quiet">印刷 / PDF保存</button>
-      </div>
-
-      <article class="certificate" id="certificate">
-        <header class="cert-header">
-          <h3>筆 跡 照 合 報 告 書</h3>
-          <p class="cert-id" id="cert-id"></p>
-        </header>
-
-        <table class="cert-meta">
-          <tbody>
-            <tr><th>作成日</th><td id="cert-date"></td></tr>
-            <tr><th>案件名</th><td id="cert-case-name"></td></tr>
-            <tr><th>試料枚数</th><td id="cert-sample-count"></td></tr>
-            <tr><th>対照枚数</th><td id="cert-reference-count"></td></tr>
-            <tr><th>鑑定者</th><td id="cert-examiner-out"></td></tr>
-          </tbody>
-        </table>
-
-        <section class="cert-result">
-          <h4>総合一致度</h4>
-          <p class="cert-score" id="cert-score">--%</p>
-          <p class="cert-verdict" id="cert-verdict"></p>
-        </section>
-
-        <section class="cert-features">
-          <h4>特徴別の内訳</h4>
-          <table class="cert-feature-table" id="cert-feature-table">
-            <thead><tr><th>項目</th><th>一致度</th></tr></thead>
-            <tbody></tbody>
-          </table>
-        </section>
-
-        <section class="cert-note">
-          <h4>備考</h4>
-          <p id="cert-note-out">—</p>
-        </section>
-
-        <section class="cert-disclaimer">
-          <h4>本報告書について</h4>
-          <p>
-            本報告書は、画像から抽出した線の太さ・傾き・密度・方向分布などの統計的特徴をもとに算出した参考値であり、
-            筆跡鑑定士や司法機関による正式な鑑定書ではありません。裁判や契約上の証拠として用いる場合は、
-            必ず有資格の専門家による鑑定を別途受けてください。
-          </p>
-        </section>
-
-        <footer class="cert-sign">
-          <div class="sign-line"><span>鑑定者署名</span></div>
-          <div class="sign-stamp" aria-hidden="true"></div>
-        </footer>
-      </article>
-
-      <button id="btn-inquire-cert" class="btn btn-quiet cert-inquire-link">この鑑定書について問い合わせる</button>
-    </section>
-
-  </div><!-- /app-body -->
-
-  <!-- INQUIRY (ログイン不要・誰でも送信可) -->
-  <section class="panel" id="panel-inquiry">
-    <h2>お問い合わせ</h2>
-    <p class="hint">
-      鑑定書の内容やご依頼についてのご質問はこちらからご連絡ください。
-      無料プランの都合上、画像やPDFの添付はできません。案件名・報告書番号を書いてお送りください。
-    </p>
-    <form id="inquiry-form" class="inquiry-form">
-      <input type="text" name="name" placeholder="お名前" required>
-      <input type="email" name="email" placeholder="メールアドレス" required>
-      <input type="text" name="reference" id="inquiry-reference" placeholder="案件名・報告書番号（任意）">
-      <textarea name="message" placeholder="お問い合わせ内容" rows="4" required></textarea>
-      <button type="submit" class="btn btn-primary">送信する</button>
-      <p class="hint" id="inquiry-status"></p>
-    </form>
-  </section>
-
+  </article>
 </main>
 
 <footer class="site-footer">
   <p>筆跡照合支援ツール — 画像はFirebase Storageに、案件情報はFirestoreに保存されます（ログインユーザーのみアクセス可）。</p>
-  <p><a href="methodology.html">鑑定の手段・方法</a> ／ <a href="reliability.html">鑑定の信頼度について</a> ／ <a href="privacy.html">プライバシーポリシー</a></p>
+  <p><a href="methodology.html">鑑定の手段・方法</a> ／ <a href="reliability.html">鑑定の信頼度について</a> ／ <a href="privacy.html">プライバシーポリシー</a> ／ <a href="contact.html">お問い合わせ</a> ／ <a href="login.html">ログイン</a></p>
 </footer>
 
-<script src="analysis.js"></script>
-<script src="certificate.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js"></script>
-<script type="module" src="firebase-config.js"></script>
-<script type="module" src="firebase-backend.js"></script>
-<script type="module" src="app.js"></script>
 </body>
 </html>

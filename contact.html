@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ | 筆跡照合支援ツール</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="site-nav" aria-label="サイト内ページ">
+  <ul>
+    <li><a href="index.html">トップ</a></li>
+    <li><a href="methodology.html">鑑定の手段・方法</a></li>
+    <li><a href="reliability.html">鑑定の信頼度について</a></li>
+    <li><a href="privacy.html">プライバシーポリシー</a></li>
+    <li><a href="contact.html" aria-current="page">お問い合わせ</a></li>
+    <li><a href="login.html" class="site-nav-login">ログイン（スタッフ）</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <div class="header-inner">
+    <p class="eyebrow-none">お問い合わせ</p>
+    <h1>ご質問・ご依頼はこちらから</h1>
+    <p class="lede">
+      鑑定書の内容やご依頼についてのご質問はこちらからご連絡ください。
+      無料プランの都合上、画像やPDFの添付はできません。案件名・報告書番号がお分かりであれば、
+      合わせてご記入ください。
+    </p>
+  </div>
+</header>
+
+<main>
+  <section class="panel panel--sky">
+    <form id="inquiry-form" class="inquiry-form">
+      <input type="text" name="name" placeholder="お名前" required>
+      <input type="email" name="email" placeholder="メールアドレス" required>
+      <input type="text" name="reference" id="inquiry-reference" placeholder="案件名・報告書番号（任意）">
+      <textarea name="message" placeholder="お問い合わせ内容" rows="6" required></textarea>
+      <button type="submit" class="btn btn-primary">送信する</button>
+      <p class="hint" id="inquiry-status"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>筆跡照合支援ツール</p>
+  <p><a href="index.html">トップ</a> ／ <a href="methodology.html">鑑定の手段・方法</a> ／ <a href="reliability.html">鑑定の信頼度について</a> ／ <a href="privacy.html">プライバシーポリシー</a></p>
+</footer>
+
+<script src="contact.js"></script>
+</body>
+</html>

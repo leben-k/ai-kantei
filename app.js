@@ -1,10 +1,8 @@
 /**
  * app.js
  * 画面の状態管理とイベント配線。HandDB/HandAuthはfirebase-backend.jsが
- * window上に公開しているものを利用する。
+ * window上に公開しているものを利用する。（このファイルは login.html 専用）
  */
-
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xoeqlyay';
 
 const MAX_FILES = 5;
 let currentCase = null;
@@ -87,11 +85,6 @@ const el = {
   certExaminer: document.getElementById('cert-examiner'),
   certNote: document.getElementById('cert-note'),
   btnPrint: document.getElementById('btn-print'),
-  btnInquireCert: document.getElementById('btn-inquire-cert'),
-
-  inquiryForm: document.getElementById('inquiry-form'),
-  inquiryReference: document.getElementById('inquiry-reference'),
-  inquiryStatus: document.getElementById('inquiry-status'),
 };
 
 function escapeHtml(s) {
@@ -347,35 +340,3 @@ el.btnCertificate.addEventListener('click', () => {
 });
 
 el.btnPrint.addEventListener('click', () => window.print());
-
-el.btnInquireCert.addEventListener('click', () => {
-  const certId = document.getElementById('certificate').dataset.certId || '';
-  el.inquiryReference.value = `${currentCase.name}（${certId}）`;
-  document.getElementById('panel-inquiry').scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
-// ================= INQUIRY (Formspree) =================
-el.inquiryForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  if (FORMSPREE_ENDPOINT.includes('REPLACE_ME')) {
-    el.inquiryStatus.textContent = 'お問い合わせフォームは準備中です（Formspreeの設定が必要です）。';
-    return;
-  }
-  el.inquiryStatus.textContent = '送信しています…';
-  try {
-    const res = await fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(el.inquiryForm)
-    });
-    if (res.ok) {
-      el.inquiryStatus.textContent = '送信しました。ご連絡ありがとうございます。';
-      el.inquiryForm.reset();
-    } else {
-      el.inquiryStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
-    }
-  } catch (err) {
-    console.error(err);
-    el.inquiryStatus.textContent = '送信に失敗しました。通信環境をご確認ください。';
-  }
-});

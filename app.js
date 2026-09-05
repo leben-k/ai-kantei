@@ -4,13 +4,53 @@
  * window上に公開しているものを利用する。
  */
 
-// ここをFormspreeで発行された自分のフォームIDに置き換えてください
-// 例: https://formspree.io/f/abcdwxyz
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_ME';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xoeqlyay';
 
 const MAX_FILES = 5;
 let currentCase = null;
 let lastResult = null;
+
+// pdf.js（CDNから読み込み済み）にワーカーの場所を教える
+if (window.pdfjsLib) {
+  window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.js';
+}
+
+// PDFファイルを1ページごとに画像(Blob)へ変換する
+// 戻り値: [{ blob, name }, ...]（1ページ = 1件）
+async function pdfFileToImageItems(file) {
+  const buf = await file.arrayBuffer();
+  const pdf = await window.pdfjsLib.getDocument({ data: buf }).promise;
+  const items = [];
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const viewport = page.getViewport({ scale: 2 }); // A4を十分な解像度で描画
+    const canvas = document.createElement('canvas');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    const ctx = canvas.getContext('2d');
+    await page.render({ canvasContext: ctx, viewport }).promise;
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.92));
+    const pageLabel = pdf.numPages > 1 ? `${file.name} (p.${i})` : file.name;
+    items.push({ blob, name: pageLabel });
+  }
+  return items;
+}
+
+// 画像ファイル・PDFファイルが混ざったFileListを、
+// すべて {blob, name} の画像アイテムのリストに変換する
+async function filesToImageItems(fileList) {
+  const out = [];
+  for (const file of fileList) {
+    if (file.type === 'application/pdf') {
+      const pages = await pdfFileToImageItems(file);
+      out.push(...pages);
+    } else if (file.type.startsWith('image/')) {
+      out.push({ blob: file, name: file.name });
+    }
+  }
+  return out;
+}
 
 const el = {
   authSignedOut: document.getElementById('auth-signed-out'),
@@ -180,14 +220,25 @@ async function persistIfSaved() {
 function wireUpload(input, kind) {
   input.addEventListener('change', async () => {
     const arr = kind === 'sample' ? currentCase.sampleImages : currentCase.referenceImages;
-    const incoming = Array.from(input.files || []);
-    let blocked = false;
-    for (const file of incoming) {
-      if (arr.length >= MAX_FILES) { blocked = true; break; }
-      if (!file.type.startsWith('image/')) continue;
-      arr.push({ id: 'img-' + Date.now() + Math.random().toString(36).slice(2, 6), blob: file, name: file.name });
-    }
+    const incomingFiles = Array.from(input.files || []);
     input.value = '';
+
+    el.uploadStatus.textContent = 'PDFを画像に変換しています…';
+    let converted;
+    try {
+      converted = await filesToImageItems(incomingFiles);
+    } catch (err) {
+      console.error(err);
+      el.uploadStatus.textContent = 'PDFの変換に失敗しました。別のファイルでお試しください。';
+      return;
+    }
+
+    let blocked = false;
+    for (const item of converted) {
+      if (arr.length >= MAX_FILES) { blocked = true; break; }
+      arr.push({ id: 'img-' + Date.now() + Math.random().toString(36).slice(2, 6), blob: item.blob, name: item.name });
+    }
+
     el.uploadStatus.textContent = 'アップロードしています…';
     try {
       currentCase.name = currentCase.name || (el.caseName.value.trim() || '無題の案件');

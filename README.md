@@ -179,6 +179,19 @@ GitHubの「Add file → Upload files」から直接アップロードしても�
 6. 「鑑定書を作成する」で報告書を生成。「印刷 / PDF保存」でPDF化できます。
 7. 依頼者からの問い合わせは、`contact.html`（お問い合わせページ、Formspree経由）で受け付けます。鑑定書の「この鑑定書について問い合わせる」リンクから来た場合、案件名・報告書番号が自動入力されます。
 
+## SEO・ファビコンについて
+
+- `sitemap.xml`・`robots.txt` を追加しました。GitHub Pages公開後、Google Search Consoleに
+  `https://leben-k.github.io/ai-kantei/sitemap.xml` を登録すると、インデックス（検索結果への掲載）が
+  促進されます。
+- `login.html` は検索結果に出さないよう `robots.txt` と `<meta name="robots" content="noindex,nofollow">`
+  の両方で除外しています。
+- トップページの `<title>` ・meta descriptionには、AI鑑定・筆跡鑑定・民間鑑識・筆跡指紋鑑定・シンセイホールド・
+  岡山市北区といった語句を入れています。URLを変更した場合は、`index.html`内の`canonical`・`og:url`、および
+  `sitemap.xml`・`robots.txt`内のURLも合わせて書き換えてください。
+- ファビコンは、いただいたロゴ画像（`S-sin.jpg`）から `favicon.ico` / `favicon-16.png` / `favicon-32.png` /
+  `apple-touch-icon.png` を作成し、全ページの`<head>`に設定済みです。
+
 ## 既知の制限・今後の拡張候補
 
 - Formspree無料プランはファイル添付不可のため、鑑定書PDFの送付は手動運用です。添付が必要ならFormspreeの有料プラン、またはEmailJS等への切り替えを検討してください。

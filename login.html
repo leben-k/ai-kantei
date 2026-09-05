@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ログイン | 筆跡照合支援ツール</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,9 +26,18 @@
 
 <header class="page-header">
   <div class="header-inner">
-    <p class="eyebrow-none">スタッフ専用</p>
-    <h1>ログイン</h1>
-    <p class="lede">案件の作成・画像アップロード・照合・鑑定書の作成は、ログインしたスタッフのみが行えます。</p>
+    <svg class="page-header-icon" viewBox="0 0 48 48" role="img" aria-hidden="true">
+      <path d="M10 34 L38 34 L41 39 L7 39 Z" fill="var(--navy)"/>
+      <rect x="13" y="10" width="22" height="22" rx="2" fill="var(--navy)"/>
+      <rect x="16" y="13" width="16" height="16" rx="1" fill="#FBF8F1"/>
+      <circle cx="24" cy="21" r="4" fill="none" stroke="var(--seal)" stroke-width="2"/>
+      <path d="M24 21 v-3 M24 21 h3" stroke="var(--seal)" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <div class="page-header-text">
+      <p class="eyebrow-none">スタッフ専用</p>
+      <h1>ログイン</h1>
+      <p class="lede">案件の作成・画像アップロード・照合・鑑定書の作成は、ログインしたスタッフのみが行えます。</p>
+    </div>
   </div>
 </header>
 
@@ -52,9 +66,8 @@
     </div>
 
     <div id="auth-signed-in" hidden>
-      <p class="hint">ログイン中: <strong id="auth-user-email"></strong>
-        <button id="btn-signout" class="btn btn-quiet">ログアウト</button>
-      </p>
+      <p class="hint">ログイン中: <strong id="auth-user-email"></strong></p>
+      <button id="btn-signout" class="btn btn-danger">ログアウト</button>
     </div>
   </section>
 

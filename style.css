@@ -73,9 +73,15 @@ h1,h2,h3,h4{
   border-bottom: 3px double var(--line);
   padding: 2rem 1.4rem 1.6rem;
 }
-.page-header .header-inner{ display:block; }
+.page-header .header-inner{ display:flex; align-items:center; gap: 1.4rem; }
+.page-header-icon{ flex: 0 0 auto; width: 60px; height: 60px; }
+.page-header-text{ flex: 1; min-width:0; }
 .page-header h1{ font-size: 1.5rem; margin-bottom: .5rem; }
 .page-header .lede{ max-width: 62ch; }
+@media (max-width: 480px){
+  .page-header .header-inner{ align-items:flex-start; }
+  .page-header-icon{ width:44px; height:44px; }
+}
 
 /* ---------- article content (sub-pages) ---------- */
 .article{ max-width: 680px; margin: 0 auto; }
@@ -113,6 +119,10 @@ h1,h2,h3,h4{
   padding: 1.1rem 1.2rem; font-size: .88rem; color: var(--ink-soft);
 }
 .article .updated{ font-size: .8rem; color: var(--ink-soft); margin-top: -1rem; margin-bottom: 1.4rem; background:none; padding:0; }
+
+/* ---------- 小さな挿絵アイコン（section-icon） ---------- */
+.section-icon{ display:block; width:48px; height:48px; margin: 0 0 .6rem; }
+.expert-callout .section-icon{ margin: 0 auto .6rem; }
 
 /* ---------- 専門家への案内（トップページ） ---------- */
 .expert-callout{

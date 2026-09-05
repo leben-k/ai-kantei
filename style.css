@@ -74,9 +74,12 @@ h1,h2,h3,h4{
 .article p{ margin: 0 0 .9rem; color: var(--ink); }
 .article ul, .article ol{ margin: 0 0 .9rem; padding-left: 1.3rem; }
 .article li{ margin-bottom: .35rem; }
-.article table{ width:100%; border-collapse: collapse; margin: 0 0 1.2rem; font-size:.88rem; }
-.article th, .article td{ border-bottom: 1px solid var(--line); padding:.5rem .5rem; text-align:left; vertical-align:top; }
-.article th{ color: var(--ink-soft); font-weight:500; width: 30%; }
+.article table{ width:100%; table-layout: fixed; border-collapse: collapse; margin: 0 0 1.2rem; font-size:.88rem; }
+.article th, .article td{
+  border-bottom: 1px solid var(--line); padding:.5rem .5rem; text-align:left; vertical-align:top;
+  overflow-wrap: break-word; word-break: break-word;
+}
+.article th{ color: var(--ink-soft); font-weight:500; width: 32%; }
 .article .note-box{
   background: rgba(166,58,46,.05); border-left:3px solid var(--seal);
   padding: .9rem 1rem; font-size: .88rem; color: var(--ink-soft);

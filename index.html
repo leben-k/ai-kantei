@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>筆跡・指紋鑑定の窓口｜実績豊富な鑑定士をご案内</title>
+<meta name="description" content="筆跡や指紋鑑定は権威ある鑑定機関に依頼しましょう。鑑定は真実を語ります。真偽を確認しましょう。岡山市北区シンセイホールド">
+<meta name="keywords" content="真偽鑑定,シンセイホールド,隆線,筆圧,万人不同,個人識別,岡山市北区,鑑識,斎藤,調査,リサーチ,裁判,筆跡鑑定,指紋鑑定">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE4D0;
+    --panel:#F8F3E7;
+    --panel-line:#FFFFFF;
+    --ink:#211E1A;
+    --ink-soft:#332C22;
+    --vermilion:#B7282E;
+    --vermilion-deep:#8F1F24;
+    --muted:#564F42;
+    --line: rgba(33,30,26,0.14);
+    --grid: rgba(33,30,26,0.05);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Zen Kaku Gothic New", sans-serif;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:"Zen Old Mincho", serif;
+    font-weight:700;
+    margin:0;
+  }
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(237,228,208,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 24px; max-width:1040px; margin:0 auto;
+  }
+  .brand-mark{font-size:16px; font-weight:700; font-family:"Zen Old Mincho",serif; letter-spacing:0.04em;}
+  .brand-sub{font-size:11px; color:var(--muted); margin-top:2px;}
+  @media (min-width:480px){ .brand-mark{font-size:18px;} }
+  .header-cta{
+    font-size:13.5px;
+    background:var(--vermilion); color:#fff;
+    padding:10px 20px; border-radius:2px;
+    text-decoration:none; white-space:nowrap;
+    transition:background .2s ease;
+  }
+  .header-cta:hover{background:var(--vermilion-deep);}
+  .header-nav{
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    font-size:12.5px;
+  }
+  .header-nav a{
+    color:var(--vermilion); text-decoration:none; white-space:nowrap;
+  }
+  .header-nav a:hover{text-decoration:underline;}
+  @media (max-width:760px){
+    .header-inner{flex-wrap:wrap; row-gap:10px;}
+    .header-nav{order:3; width:100%; justify-content:flex-start; gap:12px 16px;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:64px 24px 40px; border-bottom:1px solid var(--line);}
+  .hero-inner{
+    max-width:640px; margin:0 auto;
+  }
+  .hero h1{
+    font-size:clamp(30px,4.6vw,46px);
+    line-height:1.55;
+    margin-bottom:22px;
+  }
+  .hero p.lead{
+    font-size:16px; color:var(--ink-soft); max-width:460px; margin-bottom:14px;
+  }
+  .hero p.sub{
+    font-size:14px; color:var(--muted); max-width:460px; margin-bottom:32px;
+  }
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap; align-items:center;}
+  .btn-primary{
+    background:var(--vermilion); color:#fff;
+    padding:15px 30px; text-decoration:none; font-size:14.5px;
+    border-radius:2px; font-weight:500; display:inline-block;
+    transition:background .2s ease;
+  }
+  .btn-primary:hover{background:var(--vermilion-deep);}
+  .btn-secondary{
+    color:var(--ink-soft);
+    padding:15px 6px; text-decoration:none; font-size:14.5px;
+    border-bottom:1px solid var(--ink-soft);
+    display:inline-block;
+  }
+  .hero-note{font-size:12px; color:var(--muted); margin-top:18px;}
+
+  /* ---------- Sketch illustrations ---------- */
+  .illus-row{
+    display:flex; gap:56px; justify-content:center; flex-wrap:wrap;
+    padding:8px 24px 56px;
+  }
+  .illus-item{text-align:center; max-width:170px;}
+  .illus-item svg{width:110px; height:110px; margin:0 auto 12px;}
+  .illus-item p{font-size:12.5px; color:var(--muted); margin:0;}
+
+  /* ---------- Trust strip ---------- */
+  .trust-strip{
+    border-bottom:1px solid var(--line);
+    background:var(--panel);
+  }
+  .trust-inner{
+    max-width:1040px; margin:0 auto; padding:26px 24px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+  }
+  @media (max-width:760px){ .trust-inner{grid-template-columns:1fr 1fr; row-gap:22px;} }
+  .trust-item{
+    display:flex; align-items:center; gap:12px;
+    padding:0 20px; border-left:1px solid var(--line);
+    font-size:12.5px; color:var(--muted);
+  }
+  .trust-item:first-child{border-left:none;}
+  @media (max-width:760px){
+    .trust-item:nth-child(odd){border-left:none;}
+  }
+  .trust-item svg{width:26px; height:26px; flex-shrink:0;}
+
+  /* ---------- Section shared ---------- */
+  section{padding:84px 0;}
+  .section-head{max-width:600px; margin-bottom:44px;}
+  .section-head h2{font-size:clamp(23px,3vw,32px); line-height:1.6;}
+  .section-head p{color:var(--muted); font-size:14px; margin-top:14px;}
+
+  /* ---------- Concerns (folder tabs) ---------- */
+  .concern-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:2px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:700px){ .concern-grid{grid-template-columns:1fr;} }
+  .concern-item{
+    background:var(--panel);
+    padding:26px 26px;
+    display:flex; gap:16px; align-items:flex-start;
+    font-size:14.5px; color:var(--ink-soft);
+  }
+  .concern-item svg{width:30px; height:30px; flex-shrink:0; margin-top:2px;}
+
+  /* ---------- Services (record sheets) ---------- */
+  .service-sheet{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:0 0 8px;
+    margin-bottom:26px;
+  }
+  .service-sheet-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 32px; border-bottom:1px solid var(--line);
+  }
+  .service-sheet-head .kind{font-size:12px; color:var(--muted);}
+  .service-sheet-head .no{font-size:12px; color:var(--muted);}
+  .service-sheet-body{
+    padding:32px; display:grid; grid-template-columns:1fr 220px; gap:32px; align-items:center;
+  }
+  @media (max-width:760px){ .service-sheet-body{grid-template-columns:1fr;} }
+  .service-photo{
+    display:block; border:1px solid var(--line); overflow:hidden; border-radius:2px;
+    line-height:0;
+  }
+  .service-photo img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s ease;}
+  .service-photo:hover img{transform:scale(1.04);}
+  .service-photo svg{width:100%; height:auto; display:block; background:var(--paper); transition:transform .3s ease;}
+  .service-photo:hover svg{transform:scale(1.04);}
+
+  /* ---------- AI tool sheet (simplified check) ---------- */
+  .service-sheet.ai-tool-sheet{border-color:var(--vermilion); border-width:1px;}
+  .service-sheet.ai-tool-sheet .service-sheet-head{background:rgba(183,40,46,0.06);}
+  .service-sheet.ai-tool-sheet .kind{color:var(--vermilion); font-weight:700;}
+  .ai-tool-caption{font-size:12.5px; color:var(--muted); margin:14px 0 0; text-align:center;}
+  .service-sheet h3{font-size:22px; margin-bottom:12px;}
+  .service-sheet p.desc{font-size:14.5px; color:var(--ink-soft); margin-bottom:18px;}
+  .service-sheet ul{margin:0; padding-left:0; list-style:none; font-size:13.5px; color:var(--muted);}
+  .service-sheet ul li{padding:8px 0; border-top:1px dashed var(--line); padding-left:18px; position:relative;}
+  .service-sheet ul li:first-child{border-top:none;}
+  .service-sheet ul li::before{content:"—"; position:absolute; left:0; color:var(--vermilion);}
+  .sheet-link{margin:20px 0 0; font-size:13.5px;}
+  .sheet-link a{color:var(--vermilion); text-decoration:none; border-bottom:1px solid var(--vermilion);}
+
+  /* ---------- Reasons (stamp checklist) ---------- */
+  .reasons-list{border-top:1px solid var(--line);}
+  .reason-row{
+    display:grid; grid-template-columns:52px 1fr; gap:22px;
+    padding:24px 0; border-bottom:1px solid var(--line);
+    align-items:flex-start;
+  }
+  .reason-row .stampmark{width:40px; height:40px;}
+  .reason-row h4{font-family:"Zen Old Mincho",serif; font-size:16.5px; font-weight:700; margin-bottom:6px;}
+  .reason-row p{font-size:13.5px; color:var(--muted); margin:0;}
+
+  /* ---------- Flow (thread timeline) ---------- */
+  .flow-wrap{position:relative; padding-left:28px;}
+  .flow-line{position:absolute; left:9px; top:8px; bottom:8px; width:1px; background:var(--line);}
+  .flow-step{position:relative; padding:0 0 40px 30px;}
+  .flow-step:last-child{padding-bottom:0;}
+  .flow-step::before{
+    content:""; position:absolute; left:-30px; top:2px;
+    width:20px; height:20px; border-radius:50%;
+    background:var(--paper); border:1.5px solid var(--vermilion);
+  }
+  .flow-step::after{
+    content:attr(data-n); position:absolute; left:-30px; top:2px;
+    width:20px; height:20px; text-align:center; line-height:20px;
+    font-size:11px; color:var(--vermilion); font-weight:700;
+  }
+  .flow-step h4{font-size:16px; font-weight:700; margin-bottom:6px; font-family:"Zen Kaku Gothic New",sans-serif;}
+  .flow-step p{font-size:13.5px; color:var(--muted); margin:0; max-width:520px;}
+
+  /* ---------- Divider banner ---------- */
+  .divider-band{
+    padding:60px 24px; text-align:center;
+    border-bottom:1px solid var(--line);
+    border-top:1px solid var(--line);
+  }
+  .divider-band svg{width:64px; height:64px; margin:0 auto 18px;}
+  .divider-band p{
+    font-family:"Zen Old Mincho",serif; font-size:16px; color:var(--ink-soft);
+    letter-spacing:0.06em; margin:0;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none;
+    padding:22px 2px; font-size:15px; font-weight:500; color:var(--ink);
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    cursor:pointer; font-family:"Zen Kaku Gothic New",sans-serif;
+  }
+  .faq-q .plus{color:var(--vermilion); font-size:20px; transition:transform .2s ease; flex-shrink:0;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0; overflow:hidden; transition:max-height .25s ease;
+    font-size:14px; color:var(--muted); padding:0 2px;
+  }
+  .faq-item.open .faq-a{padding-bottom:20px;}
+
+  /* ---------- Contact form ---------- */
+  .contact-panel{
+    background:var(--panel); border:1px solid var(--line);
+    padding:44px 40px;
+  }
+  @media (max-width:600px){ .contact-panel{padding:30px 20px;} }
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:600px){ .form-grid{grid-template-columns:1fr;} }
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field.full{grid-column:1 / -1;}
+  label{font-size:12.5px; color:var(--muted);}
+  input[type=text], input[type=email], input[type=tel], textarea{
+    border:1px solid var(--line); background:#fff;
+    padding:12px 14px; font-size:14px; font-family:"Zen Kaku Gothic New",sans-serif;
+    color:var(--ink); border-radius:2px;
+  }
+  input:focus, textarea:focus{
+    outline:2px solid var(--vermilion); outline-offset:1px;
+  }
+  textarea{resize:vertical; min-height:110px;}
+  .radio-row{display:flex; gap:20px; flex-wrap:wrap; font-size:14px;}
+  .radio-row label{font-size:14px; color:var(--ink); display:flex; gap:6px; align-items:center;}
+  .consent{display:flex; gap:10px; align-items:flex-start; font-size:12.5px; color:var(--muted);}
+  .submit-btn{
+    background:var(--vermilion); color:#fff; border:none;
+    padding:16px 40px; font-size:14.5px; border-radius:2px; cursor:pointer;
+    font-family:"Zen Kaku Gothic New",sans-serif; font-weight:500;
+    transition:background .2s ease;
+  }
+  .submit-btn:hover{background:var(--vermilion-deep);}
+
+  .to-top{
+    display:block; text-align:center; padding:20px 24px;
+    font-size:13px;
+    color:var(--muted); text-decoration:none; border-top:1px solid var(--line);
+  }
+  .to-top:hover{color:var(--vermilion);}
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:36px 24px; font-size:12.5px; color:var(--muted);
+  }
+  .footer-inner{
+    max-width:1040px; margin:0 auto;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+  .footer-inner a{text-decoration:underline;}
+</style>
+</head>
+<body id="top">
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="brand-mark">筆跡指紋鑑定</div>
+      <div class="brand-sub">専門鑑定士のご案内サービス</div>
+    </div>
+    <nav class="header-nav">
+      <a href="news.html">お知らせ</a>
+      <a href="guide.html">鑑定</a>
+      <a href="important-notice.html">重要事項説明</a>
+      <a href="about.html">業務概要</a>
+      <a href="calendar.html">営業日</a>
+    </nav>
+    <a class="header-cta" href="#contact">無料相談</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>鑑定が真実を語る！</h1>
+      <p class="lead">筆跡鑑定・指紋鑑定の専門家を必要な方に最短時間でご紹介します。</p>
+      <p class="sub">相続トラブルにおける遺言書の真偽、契約書の偽造疑惑、匿名の書き置き、内部不正の調査まで。全国対応・秘密厳守で、実績豊富な鑑定士とあなたをおつなぎします。</p>
+      <div class="cta-row">
+        <a class="btn-primary" href="#contact">無料相談する</a>
+        <a class="btn-secondary" href="#services">2つの鑑定分野を見る</a>
+      </div>
+      <p class="hero-note">※ 鑑定料金・お見積りは無料相談にてご案内します。</p>
+    </div>
+  </div>
+</section>
+
+<div class="illus-row">
+  <div class="illus-item">
+    <svg viewBox="0 0 120 120" fill="none" stroke="#7FA9C9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="28" y="18" width="64" height="80" rx="2"/>
+      <path d="M40 18v-6h40v6"/>
+      <line x1="40" y1="34" x2="80" y2="34"/>
+      <line x1="40" y1="46" x2="80" y2="46"/>
+      <line x1="40" y1="58" x2="80" y2="58"/>
+      <path d="M40 76c8 6 16 6 20 0 4 6 12 6 20 0" />
+      <circle cx="80" cy="86" r="9"/>
+      <path d="M76 86l3 3 6-6" stroke-width="1.8"/>
+    </svg>
+    <p>遺言書・契約書の真偽確認</p>
+  </div>
+  <div class="illus-item">
+    <svg viewBox="0 0 120 120" fill="none" stroke="#7FA9C9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M60 14 L100 34 L20 34 Z"/>
+      <line x1="26" y1="34" x2="26" y2="82"/>
+      <line x1="94" y1="34" x2="94" y2="82"/>
+      <line x1="16" y1="90" x2="104" y2="90"/>
+      <line x1="16" y1="90" x2="16" y2="98"/>
+      <line x1="104" y1="90" x2="104" y2="98"/>
+      <rect x="34" y="46" width="10" height="36"/>
+      <rect x="55" y="46" width="10" height="36"/>
+      <rect x="76" y="46" width="10" height="36"/>
+      <circle cx="60" cy="24" r="3.4"/>
+    </svg>
+    <p>裁判資料としての活用</p>
+  </div>
+</div>
+
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="#B7282E" stroke-width="2"/><path d="M16 10v6l4 3" stroke="#B7282E" stroke-width="2" stroke-linecap="round"/></svg>
+      運動生理学や脳科学に基づく理論、科学的識別理論に基づく客観分析
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 32 32" fill="none"><rect x="8" y="5" width="16" height="22" rx="1" stroke="#B7282E" stroke-width="2"/><path d="M12 12h8M12 17h8M12 22h5" stroke="#B7282E" stroke-width="2" stroke-linecap="round"/></svg>
+      裁判資料としても通用する鑑定書
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 32 32" fill="none"><path d="M16 4l11 4v8c0 8-5 13-11 15-6-2-11-7-11-15V8z" stroke="#B7282E" stroke-width="2" stroke-linejoin="round"/></svg>
+      全国対応・秘密厳守
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="#B7282E" stroke-width="2"/><path d="M11 16l4 4 7-8" stroke="#B7282E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      まずは無料相談から
+    </div>
+  </div>
+</div>
+
+<section id="concerns">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>こんな思案を<br>していませんか</h2>
+    </div>
+    <div class="concern-grid">
+      <div class="concern-item">
+        <svg viewBox="0 0 32 32" fill="none"><rect x="7" y="4" width="18" height="24" rx="1" stroke="#211E1A" stroke-width="2"/><path d="M11 11h10M11 16h10M11 21h6" stroke="#211E1A" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <span>遺言書や契約書の筆跡が、本当に本人のものか確認したい</span>
+      </div>
+      <div class="concern-item">
+        <svg viewBox="0 0 32 32" fill="none"><circle cx="14" cy="14" r="8" stroke="#211E1A" stroke-width="2"/><line x1="20" y1="20" x2="27" y2="27" stroke="#211E1A" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>現場に残された指紋と、対象者の指紋を照合してほしい</span>
+      </div>
+      <div class="concern-item">
+        <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" rx="1" stroke="#211E1A" stroke-width="2"/><path d="M5 9l11 9 11-9" stroke="#211E1A" stroke-width="2" stroke-linejoin="round"/></svg>
+        <span>匿名の手紙や書き置きの差出人を特定したい</span>
+      </div>
+      <div class="concern-item">
+        <svg viewBox="0 0 32 32" fill="none"><path d="M16 4l10 4v7c0 7-4 12-10 13-6-1-10-6-10-13V8z" stroke="#211E1A" stroke-width="2" stroke-linejoin="round"/><path d="M12 16l3 3 5-6" stroke="#211E1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>盗難・不正侵入・内部不正の物的証拠を集めたい</span>
+      </div>
+      <div class="concern-item" style="grid-column:1 / -1;">
+        <svg viewBox="0 0 32 32" fill="none"><path d="M6 24h20M9 24V13l7-6 7 6v11" stroke="#211E1A" stroke-width="2" stroke-linejoin="round"/><path d="M13 24v-6h6v6" stroke="#211E1A" stroke-width="2"/></svg>
+        <span>裁判や調停で、客観的な鑑定書を証拠として提出したい</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>2つの鑑定分野に<br>対応しています</h2>
+      <p>提携する専門鑑定士を案件の内容に応じてご案内します。</p>
+    </div>
+
+    <div class="service-sheet">
+      <div class="service-sheet-head">
+        <span class="kind">鑑定分野 A</span>
+        <span class="no">筆跡鑑定</span>
+      </div>
+      <div class="service-sheet-body">
+        <div>
+          <h3>筆跡鑑定</h3>
+          <p class="desc">遺言書・契約書・脅迫状など、あらゆる筆跡から同一人物性を科学的に鑑定します。運筆の速度、筆圧、字形の癖といった要素を照合し、根拠を示します。</p>
+          <ul>
+            <li>相続トラブル（遺言書の真偽確認）</li>
+            <li>契約書・領収書のサイン偽造疑惑</li>
+            <li>脅迫状・匿名文書の差出人特定</li>
+          </ul>
+          <p class="sheet-link"><a href="guide.html#handwriting">筆跡鑑定とは何か、詳しく見る →</a></p>
+        </div>
+        <a class="service-photo" href="guide.html#handwriting" aria-label="筆跡鑑定とは何か、詳しく見る">
+          <img src="handwriting.jpg" alt="筆跡鑑定のイメージ：顕微鏡で書類の筆跡を分析する様子">
+        </a>
+      </div>
+    </div>
+
+    <div class="service-sheet">
+      <div class="service-sheet-head">
+        <span class="kind">鑑定分野 B</span>
+        <span class="no">指紋鑑定</span>
+      </div>
+      <div class="service-sheet-body">
+        <div>
+          <h3>指紋鑑定</h3>
+          <p class="desc">現場に残された指紋と対象者の指紋を照合し、隆線の分岐点や特徴点を突き合わせて客観的な証拠を提示します。</p>
+          <ul>
+            <li>盗難・不正侵入の証拠確保</li>
+            <li>社内不正・情報漏洩の調査</li>
+            <li>所有物・書類の真贋確認</li>
+          </ul>
+          <p class="sheet-link"><a href="guide.html#fingerprint">指紋鑑定とは何か、詳しく見る →</a></p>
+        </div>
+        <a class="service-photo" href="guide.html#fingerprint" aria-label="指紋鑑定とは何か、詳しく見る">
+          <img src="fingerprint.jpg" alt="指紋鑑定のイメージ：指紋データを照合する様子">
+        </a>
+      </div>
+    </div>
+
+    <div class="service-sheet ai-tool-sheet">
+      <div class="service-sheet-head">
+        <span class="kind">簡易チェック</span>
+        <span class="no">AI筆跡照合支援ツール</span>
+      </div>
+      <div class="service-sheet-body">
+        <div>
+          <h3>まずはAIで傾向を確認したい方へ</h3>
+          <p class="desc">正式な鑑定をご依頼いただく前に、傾向だけ手早く確認したいという方には、AIによる筆跡照合支援ツールもご用意しています。試料筆跡と対照筆跡をアップロードし、画像の統計的な特徴を数値化して照合するためのツールです。このAI筆跡鑑定は、お預かりしたスタッフが対応いたします。</p>
+          <ul>
+            <li>算出されるのはあくまで参考値です</li>
+            <li>法的な証拠能力を持つ鑑定書ではありません</li>
+            <li>裁判・契約など正式な証拠が必要な場合は、上記の鑑定士による鑑定をご利用ください</li>
+          </ul>
+          <p class="sheet-link"><a href="https://leben-k.github.io/ai-kantei/index.html">AI筆跡照合支援ツールを開く →</a></p>
+        </div>
+        <div>
+          <a class="service-photo" href="https://leben-k.github.io/ai-kantei/index.html" aria-label="AI筆跡照合支援ツールを開く">
+            <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+              <rect x="0" y="0" width="480" height="260" fill="var(--panel)"/>
+              <rect x="20" y="230" width="440" height="6" fill="var(--line)"/>
+              <path d="M120 210 L360 210 L380 230 L100 230 Z" fill="var(--ink)"/>
+              <rect x="150" y="72" width="180" height="138" rx="8" fill="var(--ink)"/>
+              <rect x="160" y="82" width="160" height="118" rx="4" fill="var(--panel)"/>
+              <path d="M175 122 q10 -18 20 0 t20 0 t20 0 t20 0" fill="none" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M175 146 q8 -14 16 0 t16 0 t16 0 t16 0 t16 0" fill="none" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="262" cy="134" r="26" fill="rgba(183,40,46,0.08)" stroke="var(--vermilion)" stroke-width="5"/>
+              <line x1="281" y1="153" x2="300" y2="172" stroke="var(--vermilion)" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="262" cy="134" r="10" fill="none" stroke="var(--vermilion)" stroke-width="3"/>
+              <path d="M257 134 l4 4 l8 -9" fill="none" stroke="var(--vermilion)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="345" y="92" width="80" height="108" rx="4" fill="var(--panel)" stroke="var(--line)" stroke-width="2"/>
+              <line x1="360" y1="114" x2="410" y2="114" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="360" y1="128" x2="410" y2="128" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+              <line x1="360" y1="142" x2="395" y2="142" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="393" cy="172" r="14" fill="none" stroke="var(--vermilion)" stroke-width="3"/>
+              <text x="393" y="177" text-anchor="middle" font-family="'Zen Old Mincho',serif" font-size="13" fill="var(--vermilion)">印</text>
+            </svg>
+          </a>
+          <p class="ai-tool-caption">クリックしてAI筆跡照合支援ツールへ</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reasons">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>鑑定所を選ぶ理由</h2>
+    </div>
+    <div class="reasons-list">
+      <div class="reason-row">
+        <svg class="stampmark" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="17" stroke="#B7282E" stroke-width="2"/><path d="M13 20l5 5 10-11" stroke="#B7282E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h4>実績豊富な鑑定士のみ厳選</h4>
+          <p>相続・訴訟・企業調査など、多数の実績を持つ専門家とのみ提携しています。</p>
+        </div>
+      </div>
+      <div class="reason-row">
+        <svg class="stampmark" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="17" stroke="#B7282E" stroke-width="2"/><path d="M13 20l5 5 10-11" stroke="#B7282E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h4>裁判資料として通用する鑑定書</h4>
+          <p>客観的根拠に基づき、法的な場でも使える形式の報告書を作成します。</p>
+        </div>
+      </div>
+      <div class="reason-row">
+        <svg class="stampmark" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="17" stroke="#B7282E" stroke-width="2"/><path d="M13 20l5 5 10-11" stroke="#B7282E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h4>筆跡・指紋の両方に対応</h4>
+          <p>複数の証拠を組み合わせた総合的な調査のご相談も可能です。</p>
+        </div>
+      </div>
+      <div class="reason-row">
+        <svg class="stampmark" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="17" stroke="#B7282E" stroke-width="2"/><path d="M13 20l5 5 10-11" stroke="#B7282E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h4>全国対応・秘密厳守</h4>
+          <p>郵送・データ送付でのご依頼に対応。個人情報の管理を徹底しています。</p>
+        </div>
+      </div>
+      <div class="reason-row">
+        <svg class="stampmark" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="17" stroke="#B7282E" stroke-width="2"/><path d="M13 20l5 5 10-11" stroke="#B7282E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <h4>まずは無料相談から</h4>
+          <p>料金や期間が不安な方も、お気軽に無料相談ください。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>ご依頼の流れ</h2>
+    </div>
+    <div class="flow-wrap">
+      <div class="flow-line"></div>
+      <div class="flow-step" data-n="1">
+        <h4>無料相談のお申し込み</h4>
+        <p>フォームまたはお電話で内容をお伺いし、概算のお見積りをご案内します。</p>
+      </div>
+      <div class="flow-step" data-n="2">
+        <h4>試料のご送付</h4>
+        <p>鑑定対象の筆跡・指紋サンプルを郵送またはデータでお送りいただきます。</p>
+      </div>
+      <div class="flow-step" data-n="3">
+        <h4>専門鑑定士による分析</h4>
+        <p>提携する鑑定士が詳細な分析・照合を実施します。</p>
+      </div>
+      <div class="flow-step" data-n="4">
+        <h4>鑑定報告書の受け取り</h4>
+        <p>結果を報告書にまとめ、郵送またはデータでお渡しします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-band">
+  <svg viewBox="0 0 64 64" fill="none">
+    <circle cx="32" cy="32" r="24" stroke="#B7282E" stroke-width="2"/>
+    <path d="M22 32l7 7 14-15" stroke="#B7282E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <p>揺るぎない真実は鑑定からはじまる！</p>
+</div>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>よくあるご質問</h2>
+    </div>
+    <div id="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">鑑定にはどのくらい時間がかかりますか？<span class="plus">+</span></button>
+        <div class="faq-a">内容により異なりますが、通常3〜4週間程度です。お急ぎの場合はご相談ください。</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">裁判で証拠として使えますか？<span class="plus">+</span></button>
+        <div class="faq-a">はい。法的な場面でも通用する形式で鑑定報告書を作成しています。</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">指紋の採取はどのように行えばいいですか？<span class="plus">+</span></button>
+        <div class="faq-a">対象物をそのままお送りいただくか、採取方法を個別にご案内します。無理に触れず、まずはご相談ください。</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">費用はどのくらいですか？<span class="plus">+</span></button>
+        <div class="faq-a">案件内容により異なるため、まずは無料相談・お見積りをご利用ください。※基本料金は重要事項説明の最下部にある「鑑定料金」からご確認ください。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>無料相談（お問い合わせ含む）</h2>
+      <p>下記フォームよりご連絡ください。24時間以内に担当者よりご返信します。</p>
+    </div>
+
+    <div class="contact-panel">
+      <form action="https://formspree.io/f/mjyvggjd" method="POST">
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">お名前</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="tel">電話番号（任意）</label>
+            <input type="tel" id="tel" name="tel">
+          </div>
+          <div class="field">
+            <label>ご希望の鑑定種別</label>
+            <div class="radio-row">
+              <label><input type="radio" name="service" value="筆跡鑑定" checked>筆跡鑑定</label>
+              <label><input type="radio" name="service" value="指紋鑑定">指紋鑑定</label>
+              <label><input type="radio" name="service" value="わからない・相談したい">わからない・相談したい</label>
+            </div>
+          </div>
+          <div class="field full">
+            <label for="message">ご相談内容</label>
+            <textarea id="message" name="message" required placeholder="状況やご希望などをご記入ください"></textarea>
+          </div>
+          <div class="field full">
+            <div class="consent">
+              <input type="checkbox" id="consent" required style="margin-top:3px;">
+              <label for="consent"><a href="privacy.html" target="_blank" style="color:var(--vermilion);">プライバシーポリシー</a>の内容に同意の上、送信します。ご記入いただいた情報は、ご相談対応の目的以外には使用しません。</label>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:26px;">
+          <button type="submit" class="submit-btn">この内容で送信する</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<a class="to-top" href="#top">ページのトップへ戻る</a>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 <a href="#top">筆跡指紋鑑定</a></span>
+    <span><a href="#contact" style="color:inherit;">無料相談はこちら</a>　／　<a href="news.html">お知らせ</a>　／　<a href="important-notice.html">重要事項説明</a>　
+  ／　<a href="about.html">業務概要</a>　／　<a href="privacy.html">プライバシーポリシー</a></span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el){
+        el.classList.remove('open');
+        el.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

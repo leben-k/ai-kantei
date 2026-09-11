@@ -33,20 +33,24 @@ JPEG・PNGに加え、**PDFのアップロードにも対応**しています。
 handwriting-appraisal/
 ├── index.html              # トップページ（誰でも閲覧可・概要と信頼度の説明・専門家紹介リンク）
 ├── login.html              # ログインページ（スタッフ専用・案件作成〜筆跡照合報告書作成の機能一式）
+├── check.html               # 「その場で試す」ページ（ログイン不要・ブラウザ内完結）
 ├── contact.html            # お問い合わせページ（Formspreeフォーム）
-├── methodology.html        # 「鑑定の手段・方法」ページ
-├── reliability.html        # 「鑑定の信頼度について」ページ
-├── privacy.html            # 「プライバシーポリシー」ページ（要編集・下記参照）
+├── methodology.html        # 「照合の手段・方法」ページ
+├── reliability.html        # 「照合の信頼度について」ページ
+├── privacy.html            # 「プライバシーポリシー」ページ（利用方法ごとに分けて記載済み）
+├── operator.html           # 「運営者情報」ページ（運営者名・連絡先はここに記載。要編集）
 ├── style.css               # デザイン（全ページ共通）
 ├── analysis.js             # 画像特徴抽出・類似度計算（ブラウザ内で完結）
 ├── certificate.js          # 筆跡照合報告書の描画
+├── check.js                # check.html専用：画面の状態管理・イベント配線
 ├── contact.js              # お問い合わせページ専用スクリプト（Formspreeの送信先はここ）
+├── copyright.js            # フッターの著作権表示年を自動更新
 ├── firebase-config.js      # あなたのFirebaseプロジェクトの設定値（要編集）
 ├── firebase-backend.js     # Firestore/Storage/Authのラッパー（共有データベース層）
 └── app.js                  # login.html専用：画面の状態管理・イベント配線
 ```
 
-`methodology.html`・`reliability.html`は内容の編集は不要ですが、`privacy.html`は運営者名・連絡先・最終更新日などを実際の内容に書き換えてから公開してください（本文中に記入箇所を示すコメントがあります）。このプライバシーポリシーはひな形であり、法的助言ではありません。実際の運用前に必要に応じて専門家の確認を受けてください。
+`methodology.html`・`reliability.html`・`privacy.html`は内容の編集は不要ですが、`operator.html`は運営者名・所在地・連絡先を実際の内容に書き換えてから公開してください。`privacy.html`は「その場で試す」「スタッフによる鑑定（ログイン制）」「お問い合わせフォーム」の3つの利用方法ごとに分けて記載したひな形であり、法的助言ではありません。実際の運用前に必要に応じて専門家の確認を受けてください。
 
 ---
 
@@ -147,8 +151,10 @@ handwriting-appraisal/
 ### 7. GitHub Pagesで公開する
 
 このプロジェクト用のリポジトリ（`https://github.com/leben-k/ai-kantei.git`）に、このフォルダの中身
-（`index.html`, `login.html`, `contact.html`, `methodology.html`, `reliability.html`, `privacy.html`,
-`style.css`, `analysis.js`, `certificate.js`, `contact.js`, `firebase-config.js`, `firebase-backend.js`,
+（`index.html`, `login.html`, `check.html`, `contact.html`, `methodology.html`, `reliability.html`,
+`privacy.html`, `operator.html`,
+`style.css`, `analysis.js`, `certificate.js`, `check.js`, `contact.js`, `copyright.js`,
+`firebase-config.js`, `firebase-backend.js`,
 `app.js`, `README.md`）をルート直下にそのままアップロードします（サブフォルダは作りません）。
 
 ```bash
@@ -202,7 +208,7 @@ GitHubの「Add file → Upload files」から直接アップロードしても�
   促進されます。
 - `login.html` は検索結果に出さないよう `robots.txt` と `<meta name="robots" content="noindex,nofollow">`
   の両方で除外しています。
-- トップページの `<title>` ・meta descriptionには、AI鑑定・筆跡鑑定・民間鑑識・筆跡指紋鑑定・シンセイホールド・
+- トップページの `<title>` ・meta descriptionには、AI鑑定・筆跡鑑定・筆跡指紋鑑定・シンセイホールド・
   岡山市北区といった語句を入れています。URLを変更した場合は、`index.html`内の`canonical`・`og:url`、および
   `sitemap.xml`・`robots.txt`内のURLも合わせて書き換えてください。
 - ファビコンは、いただいたロゴ画像（`S-sin.jpg`）から `favicon.ico` / `favicon-16.png` / `favicon-32.png` /
